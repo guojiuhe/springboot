@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace和里面标签的id两者都是为了动态代理而需要的-->
+<mapper namespace="guojiuhe.demo.tools.employee.mapper.EmployeeMapper">
+    <resultMap id="employeeMap" type="guojiuhe.demo.tools.employee.EmployeePojo">
+        <id property="id" column="id_"></id>
+        <result property="employeeId" column="employee_id"></result>
+        <result property="employeeName" column="employee_name"></result>
+        <result property="departmentName" column="department_name"></result>
+        <result property="jobName" column="job_name"></result>
+        <result property="employeeLevel" column="employee_level"/>
+        <result property="employeeMgrLevel" column="employee_mgr_level"></result>
+        <result property="email" column="email"></result>
+        <result property="phone" column="phone"></result>
+        <result property="status" column="status"></result>
+        <result property="remark" column="remark"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+    </resultMap>
+    <insert id="addEmployee">
+        INSERT INTO tf_employee (employee_id,employee_name,department_name,job_name,employee_level,
+        employee_mgr_level,email,phone,status,remark,create_date)
+        VALUES (#{employeeId},#{employeeName},#{departmentName},#{jobName},#{employeeLevel},#{employeeMgrLevel}
+        ,#{email},#{phone},#{status},#{remark},#{createDate})
+    </insert>
+    <delete id="deleteById">
+        delete from tf_employee where id = #{id}
+    </delete>
+    <delete id="deleteByEmployeeId">
+        delete from tf_employee where employee_id = #{employeeId}
+    </delete>
+    <update id="update">
+    </update>
+    <select id="getEmployeeByEmployeeId" resultMap="employeeMap">
+        select id,employee_id,employee_name,department_name,job_name,employee_level,
+        employee_mgr_level,email,phone,status,remark,create_date,update_date from tf_employee
+        where employee_id = #{employeeId}
+    </select>
+</mapper>
